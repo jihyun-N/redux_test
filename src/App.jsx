@@ -1,15 +1,41 @@
-import "./App.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { plus } from "./redux/modules/calculator";
+import { minus } from "./redux/modules/calculator";
 
 function App() {
+  const dispatch = useDispatch();
+  const number = useSelector((state) => state.calculator.number);
+
+  const [num, setNum] = useState(0);
+
+  const onChangeHandler = (e) => {
+    const { value } = e.target;
+    setNum(+value);
+  };
+
+  const onClickAddNumberHandler = () => {
+    dispatch(plus(num));
+    setNum(0);
+  };
+
+  const onClickMinusNumberHandler = () => {
+    dispatch(minus(num));
+    setNum(0);
+  };
   return (
     <div className="App">
       <h1>덧셈과 뺄셈이 가능한 앱 만들기</h1>
       <div>
-        <input /> 만큼을 <button>더할게요</button> <button>뺄게요</button>
+        <input type="number" onChange={onChangeHandler} /> 만큼을
+        <button onClick={onClickAddNumberHandler}>더할게요</button>
+        <div>
+          <button onClick={onClickMinusNumberHandler}>뺄게요</button>
+        </div>
       </div>
       <hr />
       <div>
-        <h3>결과</h3>
+        <h3>결과 : {number} </h3>
         <p>0</p>
       </div>
     </div>
