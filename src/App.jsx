@@ -16,12 +16,10 @@ function App() {
 
   const onClickAddNumberHandler = () => {
     dispatch(plus(num));
-    setNum(0);
   };
 
   const onClickMinusNumberHandler = () => {
     dispatch(minus(num));
-    setNum(0);
   };
   return (
     <div className="App">
